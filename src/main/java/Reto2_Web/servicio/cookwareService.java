@@ -17,14 +17,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class cookwareService {
-     @Autowired
+
+    @Autowired
     private cookwareRepositorio clotheRepository;
 
     public List<cookware> getAll() {
         return clotheRepository.getAll();
     }
 
-   public Optional<cookware> getClothe(String reference) {
+    public Optional<cookware> getClothe(String reference) {
         return clotheRepository.getClothe(reference);
     }
 
@@ -41,18 +42,27 @@ public class cookwareService {
         if (accesory.getReference() != null) {
             Optional<cookware> accesoryDb = clotheRepository.getClothe(accesory.getReference());
             if (!accesoryDb.isEmpty()) {
-                
-                if (accesory.getBrand()!= null) {
+
+                if (accesory.getBrand() != null) {
                     accesoryDb.get().setBrand(accesory.getBrand());
                 }
-                
+
                 if (accesory.getCategory() != null) {
                     accesoryDb.get().setCategory(accesory.getCategory());
                 }
-                
+
+                if (accesory.getMateriales() != null) {
+                    accesoryDb.get().setMateriales(accesory.getMateriales());
+                }
+
+                if (accesory.getDimensiones() != null) {
+                    accesoryDb.get().setDimensiones(accesory.getDimensiones());
+                }
+
                 if (accesory.getDescription() != null) {
                     accesoryDb.get().setDescription(accesory.getDescription());
                 }
+
                 if (accesory.getPrice() != 0.0) {
                     accesoryDb.get().setPrice(accesory.getPrice());
                 }
@@ -79,5 +89,5 @@ public class cookwareService {
             return true;
         }).orElse(false);
         return aBoolean;
-    }   
+    }
 }
